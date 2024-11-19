@@ -20,11 +20,9 @@ export class CreateUserDto {
 
   @ApiProperty({ example: '081330129266' })
   @IsOptional()
-  @IsEmail()
   phone: string;
 
   @ApiProperty({ example: 'qweqweqwe' })
   @IsOptional()
-  @IsEmail()
   password: string;
 }

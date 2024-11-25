@@ -1,15 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsEmail, IsOptional } from 'class-validator';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
 import { lowerCaseTransformer } from 'src/shared/transformers/lower-case.transformer';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'User' })
   @IsOptional()
+  @IsString()
   name: string;
 
   @ApiProperty({ example: 'User' })
   @IsOptional()
+  @IsString()
   username: string;
 
   @ApiProperty({ example: 'user@user.com' })
@@ -20,9 +22,11 @@ export class CreateUserDto {
 
   @ApiProperty({ example: '081330129266' })
   @IsOptional()
+  @IsString()
   phone: string;
 
   @ApiProperty({ example: 'qweqweqwe' })
   @IsOptional()
+  @IsString()
   password: string;
 }

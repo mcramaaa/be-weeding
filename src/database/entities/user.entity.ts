@@ -7,8 +7,10 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Wedding } from './wedding.entity';
 
 @Entity()
 export class Users extends EntityHelper {
@@ -47,6 +49,9 @@ export class Users extends EntityHelper {
     }
   }
 
-  @Column({ unique: true })
-  hash: string;
+  @Column({ unique: true, nullable: true })
+  hash?: string;
+
+  @OneToMany(() => Wedding, (wedding) => wedding.id)
+  weeding: Wedding[];
 }

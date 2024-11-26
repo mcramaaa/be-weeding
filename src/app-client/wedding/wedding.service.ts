@@ -4,21 +4,31 @@ import { Repository } from 'typeorm';
 import { CreateWeddingDto } from './dto/create-wedding.dto';
 import { UpdateWeddingDto } from './dto/update-wedding.dto';
 import { Wedding } from 'src/database/entities/wedding.entity';
+import { Users } from 'src/database/entities/user.entity';
+import { UsersService } from '../user/user.service';
 
 @Injectable()
 export class WeddingService {
   constructor(
     @InjectRepository(Wedding)
     private readonly weddingRepository: Repository<Wedding>,
+    private readonly userService: UsersService,
   ) {}
 
-  create(payload: CreateWeddingDto): Promise<Wedding> {
+  async create(user: Users, payload: CreateWeddingDto): Promise<Wedding> {
     console.log(payload);
-    const wedding = this.weddingRepository.create(payload);
+    console.log(user);
+    const userData = await this.userService.findOne(user.id);
+    const wedding = this.weddingRepository.create({
+      ...payload,
+      user: userData,
+    });
+    console.log(wedding);
+    // return wedding;
     return this.weddingRepository.save(wedding);
   }
 
-  findAll(): Promise<Wedding[]> {
+  async findAll(): Promise<Wedding[]> {
     return this.weddingRepository.find();
   }
 

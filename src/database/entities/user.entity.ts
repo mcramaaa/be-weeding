@@ -17,6 +17,9 @@ export class Users extends EntityHelper {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ unique: true })
+  username: string;
+
   @Column()
   name: string;
 

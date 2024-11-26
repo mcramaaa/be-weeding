@@ -45,7 +45,7 @@ export class Wedding extends EntityHelper {
   stuffGift: string[];
 
   @ManyToOne(() => Users, (users) => users.id)
-  user: Users[];
+  user: Users;
 
   @OneToMany(() => Comment, (comment) => comment.id)
   comments: Comment[];

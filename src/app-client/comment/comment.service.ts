@@ -29,7 +29,7 @@ export class CommentService {
     const currentReplies = parent.replies ? parent.replies : [];
     const updateReplies = [
       ...currentReplies,
-      { ...payload, createAt: new Date() },
+      { ...payload, createdAt: new Date() },
     ];
     console.log(updateReplies);
     return await this.commentRepository.update(id, { replies: updateReplies });
